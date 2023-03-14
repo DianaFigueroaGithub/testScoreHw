@@ -40,12 +40,15 @@ public class AdjustScores {
     public static void main(String[] args) {
         Map finalScores = new HashMap();
         getCalificacionesOriginales().forEach((k,v) -> {
-            int value2 = (int) getCalificacionesRegularizacion().get(k);
-           if(value2 > (int)v){
-               finalScores.put(k,value2);
-           }else{finalScores.put(k,v);}
-        }
-
+                    if (getCalificacionesRegularizacion().containsKey(k)) {
+                        int value2 = (int) getCalificacionesRegularizacion().get(k);
+                        if (value2 > (int) v) {
+                            finalScores.put(k, value2);
+                        } else {
+                            finalScores.put(k, v);
+                        }
+                    } else {finalScores.put(k, v);}
+          }
         );
         finalScores.forEach((k,v) -> System.out.println("Student: "+ k+". Final Score: "+v));
     }
